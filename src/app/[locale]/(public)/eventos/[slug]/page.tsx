@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   Calendar,
   Clock,
@@ -11,6 +11,7 @@ import {
   Globe,
   ArrowLeft,
 } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { getEventBySlug, getRelatedEvents, incrementEventViews } from "@/lib/data/events";
 import { formatEventDateLong, formatPrice } from "@/lib/utils";
 import { getCategoryStyle } from "@/lib/categoryStyles";
@@ -20,21 +21,21 @@ import { ShareButton } from "@/components/events/ShareButton";
 import { AddToCalendarButton } from "@/components/events/AddToCalendarButton";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
 
-type Params = Promise<{ slug: string }>;
+type Params = Promise<{ locale: string; slug: string }>;
 
 export async function generateMetadata({
   params,
 }: {
   params: Params;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const event = await getEventBySlug(slug);
   if (!event) return {};
 
   return {
     title: event.title,
     description: event.description,
-    alternates: { canonical: `/eventos/${event.slug}` },
+    alternates: { canonical: `/${locale}/eventos/${event.slug}` },
     openGraph: {
       title: event.title,
       description: event.description,
@@ -45,7 +46,10 @@ export async function generateMetadata({
 }
 
 export default async function EventDetailPage({ params }: { params: Params }) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("eventDetail");
+
   const event = await getEventBySlug(slug);
 
   if (!event || event.status !== "PUBLISHED") {
@@ -105,9 +109,9 @@ export default async function EventDetailPage({ params }: { params: Params }) {
 
         <Link
           href="/eventos"
-          className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-ink shadow-sm backdrop-blur md:left-8 md:top-6"
+          className="absolute start-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-ink shadow-sm backdrop-blur md:start-8 md:top-6"
         >
-          <ArrowLeft size={16} /> Eventos
+          <ArrowLeft size={16} className="rtl:rotate-180" /> {t("backToEvents")}
         </Link>
 
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-4 pb-6 md:px-8 md:pb-10">
@@ -118,7 +122,7 @@ export default async function EventDetailPage({ params }: { params: Params }) {
               {event.category.icon} {event.category.name}
             </span>
             <Badge tone={event.isFree ? "success" : "ink"}>
-              {formatPrice(event.price, event.isFree)}
+              {formatPrice(event.price, event.isFree, locale)}
             </Badge>
           </div>
           <h1 className="mt-3 max-w-3xl text-balance font-display text-3xl font-bold text-white md:text-5xl">
@@ -145,12 +149,12 @@ export default async function EventDetailPage({ params }: { params: Params }) {
             <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
               <InfoTile
                 icon={<Calendar size={18} />}
-                label="Data"
-                value={formatEventDateLong(event.date)}
+                label={t("date")}
+                value={formatEventDateLong(event.date, locale)}
               />
               <InfoTile
                 icon={<Clock size={18} />}
-                label="Hora"
+                label={t("time")}
                 value={
                   event.endTime
                     ? `${event.startTime} – ${event.endTime}`
@@ -159,19 +163,19 @@ export default async function EventDetailPage({ params }: { params: Params }) {
               />
               <InfoTile
                 icon={<MapPin size={18} />}
-                label="Local"
+                label={t("location")}
                 value={event.location}
               />
               <InfoTile
                 icon={<Tag size={18} />}
-                label="Preço"
-                value={formatPrice(event.price, event.isFree)}
+                label={t("price")}
+                value={formatPrice(event.price, event.isFree, locale)}
               />
             </div>
 
             <div className="mt-10">
               <h2 className="font-display text-xl font-bold text-ink">
-                Sobre o evento
+                {t("about")}
               </h2>
               <p className="mt-3 whitespace-pre-line leading-relaxed text-ink-soft">
                 {event.description}
@@ -180,14 +184,14 @@ export default async function EventDetailPage({ params }: { params: Params }) {
 
             <div className="mt-10">
               <h2 className="font-display text-xl font-bold text-ink">
-                Localização
+                {t("locationHeading")}
               </h2>
               <p className="mt-2 flex items-center gap-1.5 text-ink-soft">
                 <MapPin size={16} /> {event.address}
               </p>
               <div className="mt-4 overflow-hidden rounded-2xl ring-1 ring-ink/10">
                 <iframe
-                  title={`Mapa de ${event.location}`}
+                  title={t("mapTitle", { location: event.location })}
                   src={`https://maps.google.com/maps?q=${encodeURIComponent(
                     event.address
                   )}&output=embed`}
@@ -203,7 +207,7 @@ export default async function EventDetailPage({ params }: { params: Params }) {
           <aside className="lg:pt-2">
             <div className="rounded-3xl bg-cream-soft p-6">
               <h3 className="font-display text-sm font-bold uppercase tracking-wide text-ink-soft">
-                Organizador
+                {t("organizer")}
               </h3>
               <p className="mt-2 flex items-center gap-2 font-display text-lg font-bold text-ink">
                 <User size={18} /> {event.organizer}
@@ -218,7 +222,7 @@ export default async function EventDetailPage({ params }: { params: Params }) {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-sm font-semibold text-azul hover:underline"
                     >
-                      <Globe size={16} /> Website
+                      <Globe size={16} /> {t("website")}
                     </a>
                   )}
                   {event.instagram && (
@@ -228,7 +232,7 @@ export default async function EventDetailPage({ params }: { params: Params }) {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-sm font-semibold text-azul hover:underline"
                     >
-                      <InstagramIcon size={16} /> Instagram
+                      <InstagramIcon size={16} /> {t("instagram")}
                     </a>
                   )}
                 </div>
@@ -240,7 +244,7 @@ export default async function EventDetailPage({ params }: { params: Params }) {
         {related.length > 0 && (
           <div className="mt-16">
             <h2 className="font-display text-2xl font-bold text-ink">
-              Também pode interessar-te
+              {t("relatedEvents")}
             </h2>
             <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((e) => (

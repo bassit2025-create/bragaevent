@@ -1,14 +1,16 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { getAllCategories } from "@/lib/data/categories";
 import { getCategoryStyle } from "@/lib/categoryStyles";
 
 export async function CategoryGrid() {
   const categories = await getAllCategories();
+  const t = await getTranslations("categoryGrid");
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
       <h2 className="mb-6 font-display text-2xl font-bold text-ink md:text-3xl">
-        Explora por categoria
+        {t("heading")}
       </h2>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {categories.map((cat) => {

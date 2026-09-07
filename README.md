@@ -11,12 +11,30 @@ Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, and Prisma
 
 - **Next.js 16** — App Router, Server Actions, Server Components
 - **Prisma 6 + PostgreSQL** — `Event`, `Banner`, `Category`, `Admin` models
+- **next-intl** — Portuguese / English / Arabic localization for the
+  public site, with RTL support for Arabic
 - **jose** — signed JWT session cookies for admin auth (no third-party auth
   provider)
 - **bcryptjs** — password hashing
 - **zod** — form validation on every Server Action
 - **Tailwind CSS v4** — custom design tokens (colors, fonts) in
   `src/app/globals.css`
+
+## Languages
+
+The public site is available in three languages, selectable via the
+language switcher in the header (desktop) or mobile menu:
+
+- `/pt` — Português (default)
+- `/en` — English
+- `/ar` — العربية (rendered right-to-left)
+
+Visiting `/` redirects to the browser's preferred language (falling back
+to Portuguese). Translation strings live in `messages/{pt,en,ar}.json`.
+
+The `/admin` dashboard is intentionally **not** localized — it always
+renders in Portuguese, since it's only used by the site owner, and is
+excluded from the locale routing entirely.
 
 ## Getting started
 
@@ -110,28 +128,41 @@ if you seeded production data — see `npm run db:seed` output below.
 ## Project structure
 
 ```
+messages/
+  pt.json, en.json, ar.json   Translation strings for the public site
 prisma/
   schema.prisma        Event / Banner / Category / Admin models
   seed.ts              Sample Braga data + admin account
 src/
+  i18n/
+    routing.ts          Supported locales, default locale, RTL list
+    navigation.ts        Locale-aware Link / useRouter / usePathname
+    request.ts           next-intl request config (loads messages)
   app/
-    (public)/          Public site (route group, shared header/footer)
-      page.tsx          Homepage
-      eventos/          Listing + filters, event detail pages
-      categorias/       Category browser
-    admin/
-      login/            Login page (outside the authenticated shell)
-      (dashboard)/       Sidebar layout + dashboard, events, banners,
-                         categories, settings — all require a session
+    [locale]/            Localized public site — its own root layout
+                         (separate <html>, sets dir="rtl" for Arabic)
+      (public)/          Route group sharing header/footer
+        page.tsx          Homepage
+        eventos/          Listing + filters, event detail pages
+        categorias/       Category browser
+        privacidade/      Privacy Policy
+        termos/           Terms & Conditions
+      opengraph-image.tsx Per-locale social preview image
+    admin/               Non-localized, Portuguese-only. Separate root
+                         layout, completely independent from [locale].
+      login/              Login page (outside the authenticated shell)
+      (dashboard)/         Sidebar layout + dashboard, events, banners,
+                           categories, settings — all require a session
     api/banners/[id]/click/  Banner click tracking endpoint
-    sitemap.ts, robots.ts, opengraph-image.tsx
-  components/           UI, home, events, admin component folders
+    sitemap.ts, robots.ts
+  components/           UI, home, events, admin, legal component folders
   lib/
     actions/            Server Actions (auth, events, banners, categories, settings)
     data/                Read queries used by public pages
     prisma.ts, session.ts, password.ts, utils.ts, categoryStyles.ts
-  proxy.ts               Optimistic auth guard for /admin/* (Next 16 renamed
-                         "middleware" to "proxy" — same mechanism)
+  proxy.ts               Combines the admin auth guard with next-intl's
+                         locale routing (Next 16 renamed "middleware" to
+                         "proxy" — same mechanism, one file total).
 ```
 
 ## Security notes

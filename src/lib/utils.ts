@@ -4,66 +4,66 @@ export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
 }
 
-const MONTHS_PT = [
-  "JAN",
-  "FEV",
-  "MAR",
-  "ABR",
-  "MAI",
-  "JUN",
-  "JUL",
-  "AGO",
-  "SET",
-  "OUT",
-  "NOV",
-  "DEZ",
-];
+/** Maps app locales to BCP-47 tags used by the Intl API. Arabic uses the
+ * `-u-nu-latn` extension so dates keep familiar Western (Latin) digits
+ * instead of switching to Eastern Arabic-Indic numerals, which reads more
+ * naturally for a Portuguese city's event dates/times. */
+const INTL_LOCALE_MAP: Record<string, string> = {
+  pt: "pt-PT",
+  en: "en-GB",
+  ar: "ar-u-nu-latn",
+};
 
-const WEEKDAYS_PT = [
-  "domingo",
-  "segunda",
-  "terça",
-  "quarta",
-  "quinta",
-  "sexta",
-  "sábado",
-];
-
-const MONTHS_FULL_PT = [
-  "janeiro",
-  "fevereiro",
-  "março",
-  "abril",
-  "maio",
-  "junho",
-  "julho",
-  "agosto",
-  "setembro",
-  "outubro",
-  "novembro",
-  "dezembro",
-];
-
-/** e.g. "12 SET" */
-export function formatEventDateShort(date: Date) {
-  const d = new Date(date);
-  return `${d.getDate()} ${MONTHS_PT[d.getMonth()]}`;
+function toIntlLocale(locale: string) {
+  return INTL_LOCALE_MAP[locale] ?? "pt-PT";
 }
 
-/** e.g. "sexta, 12 de setembro" */
-export function formatEventDateLong(date: Date) {
+/** e.g. "12 SET" / "12 SEP" */
+export function formatEventDateShort(date: Date, locale = "pt") {
   const d = new Date(date);
-  return `${WEEKDAYS_PT[d.getDay()]}, ${d.getDate()} de ${
-    MONTHS_FULL_PT[d.getMonth()]
-  }`;
+  const formatted = new Intl.DateTimeFormat(toIntlLocale(locale), {
+    day: "numeric",
+    month: "short",
+  }).format(d);
+  return locale === "ar" ? formatted : formatted.toUpperCase();
 }
 
-export function formatPrice(price: number, isFree: boolean) {
-  if (isFree) return "Grátis";
-  return new Intl.NumberFormat("pt-PT", {
+/** e.g. "sexta, 12 de setembro" / "Friday, 12 September" */
+export function formatEventDateLong(date: Date, locale = "pt") {
+  const d = new Date(date);
+  return new Intl.DateTimeFormat(toIntlLocale(locale), {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  }).format(d);
+}
+
+const FREE_LABEL: Record<string, string> = {
+  pt: "Grátis",
+  en: "Free",
+  ar: "مجاني",
+};
+
+export function formatPrice(
+  price: number,
+  isFree: boolean,
+  locale = "pt"
+) {
+  if (isFree) return FREE_LABEL[locale] ?? FREE_LABEL.pt;
+  return new Intl.NumberFormat(toIntlLocale(locale), {
     style: "currency",
     currency: "EUR",
   }).format(price);
+}
+
+/** e.g. "7 de setembro de 2026" / "7 September 2026" — used for the
+ * "last updated" date on legal pages. */
+export function formatLongDate(date: Date, locale = "pt") {
+  return new Intl.DateTimeFormat(toIntlLocale(locale), {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
 }
 
 function startOfDay(date: Date) {

@@ -61,7 +61,7 @@ export function FilterBar({
     currentQ || currentWhen || currentCategory || currentFree || currentLocation;
 
   return (
-    <div className="sticky top-16 z-30 -mx-4 border-b border-ink/8 bg-cream/95 px-4 py-3 backdrop-blur-md md:-mx-8 md:px-8">
+    <div className="sticky top-16 z-30 -mx-4 border-b border-ink/8 bg-cream px-4 py-3 md:-mx-8 md:px-8">
       <form onSubmit={handleSearchSubmit} className="mb-3 flex gap-2">
         <div className="flex flex-1 items-center gap-2 rounded-xl bg-white px-3 ring-1 ring-ink/10">
           <Search size={18} className="shrink-0 text-ink-soft" />

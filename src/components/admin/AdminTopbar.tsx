@@ -33,7 +33,7 @@ export function AdminTopbar({ adminName }: { adminName: string }) {
 
       {open && (
         <div
-          className="fixed inset-0 z-50 bg-ink/40 lg:hidden"
+          className="fixed inset-0 z-50 bg-black/60 lg:hidden"
           onClick={() => setOpen(false)}
         >
           <div className="relative h-full w-64" onClick={(e) => e.stopPropagation()}>

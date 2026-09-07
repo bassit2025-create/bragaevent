@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { getActiveBanners } from "@/lib/data/banners";
 import { BannerLink } from "@/components/home/BannerLink";
 import { prisma } from "@/lib/prisma";
@@ -7,6 +8,8 @@ export async function FeaturedBanners() {
   const banners = await getActiveBanners();
 
   if (banners.length === 0) return null;
+
+  const t = await getTranslations("banners");
 
   // Best-effort impression tracking: one impression per banner per render
   // of the homepage. Fire-and-forget so it never blocks the response.
@@ -19,10 +22,10 @@ export async function FeaturedBanners() {
     <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
       <div className="mb-6 flex items-baseline justify-between">
         <h2 className="font-display text-xl font-bold text-ink md:text-2xl">
-          Em destaque
+          {t("heading")}
         </h2>
         <span className="text-xs font-semibold uppercase tracking-wide text-ink-soft/60">
-          Publicidade
+          {t("subheading")}
         </span>
       </div>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPublishedEvents } from "@/lib/data/events";
 import { getAllCategories } from "@/lib/data/categories";
 import { prisma } from "@/lib/prisma";
@@ -7,13 +8,7 @@ import { FilterBar } from "@/components/events/FilterBar";
 import { EventCard } from "@/components/EventCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 
-export const metadata: Metadata = {
-  title: "Eventos em Braga",
-  description:
-    "Encontra concertos, festas, cultura, mercados e workshops em Braga. Filtra por data, categoria e preço.",
-  alternates: { canonical: "/eventos" },
-};
-
+type Params = Promise<{ locale: string }>;
 type SearchParams = Promise<{
   q?: string;
   categoria?: string;
@@ -22,8 +17,23 @@ type SearchParams = Promise<{
   local?: string;
 }>;
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "eventsPage" });
+  return {
+    title: t("title"),
+    description: t("metaDescription"),
+    alternates: { canonical: `/${locale}/eventos` },
+  };
+}
+
 async function EventsResults({ searchParams }: { searchParams: SearchParams }) {
   const params = await searchParams;
+  const t = await getTranslations("eventsPage");
 
   const [events, categories, locationRows] = await Promise.all([
     getPublishedEvents({
@@ -49,13 +59,15 @@ async function EventsResults({ searchParams }: { searchParams: SearchParams }) {
 
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
         <p className="mb-6 text-sm font-semibold text-ink-soft">
-          {events.length} {events.length === 1 ? "evento encontrado" : "eventos encontrados"}
+          {t(events.length === 1 ? "resultsCount_one" : "resultsCount_other", {
+            count: events.length,
+          })}
         </p>
 
         {events.length === 0 ? (
           <EmptyState
-            title="Não encontrámos eventos com estes filtros"
-            description="Tenta remover alguns filtros ou procura por outra palavra-chave."
+            title={t("emptyTitle")}
+            description={t("emptyDescription")}
             icon="🔍"
           />
         ) : (
@@ -70,20 +82,24 @@ async function EventsResults({ searchParams }: { searchParams: SearchParams }) {
   );
 }
 
-export default function EventsPage({
+export default async function EventsPage({
+  params,
   searchParams,
 }: {
+  params: Params;
   searchParams: SearchParams;
 }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("eventsPage");
+
   return (
     <div>
       <div className="mx-auto max-w-7xl px-4 pt-10 md:px-8">
         <h1 className="font-display text-3xl font-bold text-ink md:text-4xl">
-          Eventos em Braga
+          {t("title")}
         </h1>
-        <p className="mt-2 text-ink-soft">
-          Tudo o que está a acontecer na cidade, num só lugar.
-        </p>
+        <p className="mt-2 text-ink-soft">{t("subtitle")}</p>
       </div>
 
       <Suspense>

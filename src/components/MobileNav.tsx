@@ -1,30 +1,35 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export function MobileNav({
   links,
 }: {
   links: { href: string; label: string }[];
 }) {
+  const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
 
   return (
     <div className="lg:hidden">
       <button
         onClick={() => setOpen(true)}
-        aria-label="Abrir menu"
+        aria-label={t("openMenu")}
         className="flex h-11 w-11 items-center justify-center rounded-full text-ink transition-colors hover:bg-ink/5 active:scale-95"
       >
         <Menu size={24} />
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 bg-ink/40" onClick={() => setOpen(false)}>
+        // Solid overlay (no backdrop-blur / transparency) so the menu
+        // panel is fully opaque and legible over any page content.
+        <div className="fixed inset-0 z-50 bg-black/60" onClick={() => setOpen(false)}>
           <div
-            className="animate-fade-in-up ml-auto flex h-full w-[82%] max-w-sm flex-col bg-cream p-6 shadow-2xl"
+            className="animate-fade-in-up ms-auto flex h-full w-[82%] max-w-sm flex-col bg-cream p-6 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-8 flex items-center justify-between">
@@ -33,7 +38,7 @@ export function MobileNav({
               </span>
               <button
                 onClick={() => setOpen(false)}
-                aria-label="Fechar menu"
+                aria-label={t("closeMenu")}
                 className="flex h-11 w-11 items-center justify-center rounded-full text-ink hover:bg-ink/5 active:scale-95"
               >
                 <X size={24} />
@@ -53,8 +58,12 @@ export function MobileNav({
               ))}
             </nav>
 
+            <div className="mt-6 border-t border-ink/8 pt-6">
+              <LanguageSwitcher variant="mobile" />
+            </div>
+
             <div className="mt-auto pt-8 text-sm text-ink-soft">
-              Braga Event · feito com ♥ em Braga
+              Braga Event
             </div>
           </div>
         </div>

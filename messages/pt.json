@@ -1,0 +1,195 @@
+{
+  "nav": {
+    "inicio": "Início",
+    "eventos": "Eventos",
+    "hoje": "Hoje",
+    "fimDeSemana": "Este fim de semana",
+    "categorias": "Categorias",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu"
+  },
+  "hero": {
+    "badge": "Braga, Portugal",
+    "titlePrefix": "O que acontece",
+    "titleHighlight": "em Braga?",
+    "subtitle": "Descobre concertos, festas, cultura, mercados, workshops e tudo o que está a acontecer na cidade.",
+    "searchPlaceholder": "Procurar eventos em Braga...",
+    "searchButton": "Procurar"
+  },
+  "categoryShortcuts": {
+    "musica": "Música",
+    "festas": "Festas",
+    "cultura": "Cultura",
+    "gastronomia": "Gastronomia",
+    "desporto": "Desporto",
+    "mercados": "Mercados",
+    "workshops": "Workshops",
+    "familia": "Família"
+  },
+  "banners": {
+    "heading": "Em destaque",
+    "subheading": "Publicidade"
+  },
+  "upcoming": {
+    "heading": "Acontece em Braga",
+    "subheading": "Os próximos eventos que não podes perder.",
+    "viewAll": "Ver todos",
+    "viewAllEvents": "Ver todos os eventos",
+    "emptyTitle": "Ainda não há eventos publicados",
+    "emptySubheading": "Volta em breve — estamos sempre a adicionar novidades sobre Braga."
+  },
+  "categoryGrid": {
+    "heading": "Explora por categoria"
+  },
+  "eventCard": {
+    "free": "Grátis"
+  },
+  "eventsPage": {
+    "title": "Eventos em Braga",
+    "subtitle": "Tudo o que está a acontecer na cidade, num só lugar.",
+    "metaDescription": "Encontra concertos, festas, cultura, mercados e workshops em Braga. Filtra por data, categoria e preço.",
+    "resultsCount_one": "{count} evento encontrado",
+    "resultsCount_other": "{count} eventos encontrados",
+    "emptyTitle": "Não encontrámos eventos com estes filtros",
+    "emptyDescription": "Tenta remover alguns filtros ou procura por outra palavra-chave."
+  },
+  "filters": {
+    "searchPlaceholder": "Procurar eventos, locais...",
+    "search": "Procurar",
+    "today": "Hoje",
+    "tomorrow": "Amanhã",
+    "thisWeekend": "Este fim de semana",
+    "thisWeek": "Esta semana",
+    "thisMonth": "Este mês",
+    "free": "Grátis",
+    "allLocations": "Todos os locais",
+    "clear": "Limpar"
+  },
+  "eventDetail": {
+    "backToEvents": "Eventos",
+    "addToCalendar": "Adicionar ao calendário",
+    "googleCalendar": "Google Calendar",
+    "appleOutlook": "Apple / Outlook (.ics)",
+    "share": "Partilhar evento",
+    "linkCopied": "Link copiado!",
+    "date": "Data",
+    "time": "Hora",
+    "location": "Local",
+    "price": "Preço",
+    "about": "Sobre o evento",
+    "locationHeading": "Localização",
+    "organizer": "Organizador",
+    "website": "Website",
+    "instagram": "Instagram",
+    "relatedEvents": "Também pode interessar-te",
+    "mapTitle": "Mapa de {location}"
+  },
+  "categoriesPage": {
+    "title": "Categorias",
+    "subtitle": "Escolhe o que te apetece fazer em Braga hoje.",
+    "metaDescription": "Explora eventos em Braga por categoria: música, festas, cultura, gastronomia, desporto, mercados, workshops e família.",
+    "eventCount_one": "{count} evento",
+    "eventCount_other": "{count} eventos"
+  },
+  "notFound": {
+    "title": "Não encontrámos essa página",
+    "description": "O evento pode ter terminado ou o endereço está incorreto. Explora os próximos eventos em Braga.",
+    "cta": "Ver eventos em Braga",
+    "backHome": "Voltar ao início"
+  },
+  "footer": {
+    "description": "A plataforma que te mostra tudo o que está a acontecer em Braga. Concertos, festas, cultura e muito mais — sempre atualizado.",
+    "location": "Braga, Portugal",
+    "exploreHeading": "Explorar",
+    "allEvents": "Todos os eventos",
+    "todayInBraga": "Hoje em Braga",
+    "thisWeekend": "Este fim de semana",
+    "categories": "Categorias",
+    "followHeading": "Segue-nos",
+    "legalHeading": "Legal",
+    "privacyPolicy": "Política de Privacidade",
+    "termsConditions": "Termos e Condições",
+    "rights": "Todos os direitos reservados.",
+    "madeWith": "Feito com ♥ em Braga, Portugal."
+  },
+  "languageSwitcher": {
+    "label": "Idioma"
+  },
+  "legal": {
+    "lastUpdated": "Última atualização"
+  },
+  "privacy": {
+    "title": "Política de Privacidade",
+    "metaDescription": "Como o Braga Event recolhe, utiliza e protege os teus dados pessoais.",
+    "intro": "Esta Política de Privacidade explica como a Braga Event recolhe, utiliza e protege as informações dos visitantes do nosso website. Ao utilizares o site, concordas com as práticas aqui descritas.",
+    "sections": [
+      {
+        "heading": "1. Informação que recolhemos",
+        "body": "A Braga Event é uma plataforma de descoberta de eventos gratuita e aberta ao público. Não é necessário criar conta para consultar eventos. Podemos recolher automaticamente dados técnicos não identificativos, como o tipo de dispositivo, navegador, páginas visitadas e tempo de permanência, através de cookies e ferramentas analíticas, com o objetivo de melhorar a experiência do site."
+      },
+      {
+        "heading": "2. Como utilizamos a informação",
+        "body": "Utilizamos os dados recolhidos para: (a) melhorar o desempenho e a usabilidade do website; (b) compreender que conteúdos e eventos geram mais interesse; (c) medir o desempenho dos banners publicitários apresentados na secção \"Em destaque\"; e (d) garantir a segurança e o correto funcionamento da plataforma."
+      },
+      {
+        "heading": "3. Cookies",
+        "body": "Utilizamos cookies essenciais para o funcionamento do site (por exemplo, para lembrar a tua preferência de idioma) e cookies analíticos opcionais para compreender como o site é utilizado. Podes gerir ou desativar cookies nas definições do teu navegador."
+      },
+      {
+        "heading": "4. Partilha de dados",
+        "body": "Não vendemos nem partilhamos dados pessoais com terceiros para fins de marketing. Os dados agregados e anónimos sobre visualizações e cliques em eventos ou banners podem ser partilhados com anunciantes, exclusivamente sob a forma de estatísticas gerais e sem qualquer informação identificável."
+      },
+      {
+        "heading": "5. Área administrativa",
+        "body": "O acesso à área de administração é restrito e protegido por autenticação segura. As credenciais de administrador são armazenadas com encriptação (hashing) e nunca em texto simples."
+      },
+      {
+        "heading": "6. Os teus direitos",
+        "body": "Tens o direito de solicitar informação sobre os dados que possamos ter recolhido, bem como a sua correção ou eliminação, através dos contactos disponíveis no website."
+      },
+      {
+        "heading": "7. Alterações a esta política",
+        "body": "Esta Política de Privacidade pode ser atualizada periodicamente. Recomendamos a consulta regular desta página para te manteres informado sobre eventuais alterações."
+      }
+    ]
+  },
+  "terms": {
+    "title": "Termos e Condições",
+    "metaDescription": "Termos e condições de utilização da plataforma Braga Event.",
+    "intro": "Ao aceder e utilizar o website Braga Event, aceitas os termos e condições descritos abaixo. Se não concordares com algum destes termos, por favor não utilizes a plataforma.",
+    "sections": [
+      {
+        "heading": "1. Sobre a plataforma",
+        "body": "A Braga Event é uma plataforma pública e gratuita de descoberta de eventos na cidade de Braga, Portugal. Não é necessário registo ou conta para consultar, pesquisar ou filtrar eventos."
+      },
+      {
+        "heading": "2. Utilização do serviço",
+        "body": "O conteúdo apresentado (eventos, datas, preços, locais e banners publicitários) é fornecido a título informativo e é gerido exclusivamente pela administração da plataforma. A Braga Event não se responsabiliza por alterações, cancelamentos ou informações incorretas fornecidas pelos organizadores dos eventos."
+      },
+      {
+        "heading": "3. Publicidade e banners",
+        "body": "Os banners promocionais apresentados na secção \"Em destaque\" correspondem a campanhas pagas por projetos e negócios locais, geridas e publicadas exclusivamente pela administração da plataforma. A Braga Event não é responsável pelo conteúdo, produtos ou serviços anunciados por terceiros através destes banners."
+      },
+      {
+        "heading": "4. Propriedade intelectual",
+        "body": "O nome \"Braga Event\", o design, o logótipo e todo o conteúdo original do website são propriedade da plataforma. É proibida a reprodução total ou parcial sem autorização prévia."
+      },
+      {
+        "heading": "5. Limitação de responsabilidade",
+        "body": "A Braga Event esforça-se por manter a informação atualizada e precisa, mas não garante a exatidão, integridade ou disponibilidade contínua do serviço. A utilização da plataforma é feita por conta e risco do utilizador."
+      },
+      {
+        "heading": "6. Acesso administrativo",
+        "body": "O acesso a funcionalidades de gestão de conteúdo (eventos, banners, categorias) está reservado exclusivamente a administradores autenticados. Qualquer tentativa de acesso não autorizado é estritamente proibida."
+      },
+      {
+        "heading": "7. Alterações aos termos",
+        "body": "Estes Termos e Condições podem ser atualizados periodicamente sem aviso prévio. A utilização continuada da plataforma após alterações implica a aceitação dos novos termos."
+      },
+      {
+        "heading": "8. Contacto",
+        "body": "Para questões relacionadas com estes Termos e Condições ou com a Política de Privacidade, podes contactar-nos através dos canais indicados no website."
+      }
+    ]
+  }
+}

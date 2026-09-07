@@ -1,0 +1,195 @@
+{
+  "nav": {
+    "inicio": "Home",
+    "eventos": "Events",
+    "hoje": "Today",
+    "fimDeSemana": "This weekend",
+    "categorias": "Categories",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "badge": "Braga, Portugal",
+    "titlePrefix": "What's happening",
+    "titleHighlight": "in Braga?",
+    "subtitle": "Discover concerts, parties, culture, markets, workshops, and everything going on in the city.",
+    "searchPlaceholder": "Search events in Braga...",
+    "searchButton": "Search"
+  },
+  "categoryShortcuts": {
+    "musica": "Music",
+    "festas": "Parties",
+    "cultura": "Culture",
+    "gastronomia": "Food",
+    "desporto": "Sports",
+    "mercados": "Markets",
+    "workshops": "Workshops",
+    "familia": "Family"
+  },
+  "banners": {
+    "heading": "Featured",
+    "subheading": "Advertising"
+  },
+  "upcoming": {
+    "heading": "Happening in Braga",
+    "subheading": "The next events you don't want to miss.",
+    "viewAll": "View all",
+    "viewAllEvents": "View all events",
+    "emptyTitle": "No events published yet",
+    "emptySubheading": "Check back soon — we're always adding new things happening in Braga."
+  },
+  "categoryGrid": {
+    "heading": "Explore by category"
+  },
+  "eventCard": {
+    "free": "Free"
+  },
+  "eventsPage": {
+    "title": "Events in Braga",
+    "subtitle": "Everything happening in the city, in one place.",
+    "metaDescription": "Find concerts, parties, culture, markets and workshops in Braga. Filter by date, category and price.",
+    "resultsCount_one": "{count} event found",
+    "resultsCount_other": "{count} events found",
+    "emptyTitle": "We couldn't find events with these filters",
+    "emptyDescription": "Try removing some filters or searching for a different keyword."
+  },
+  "filters": {
+    "searchPlaceholder": "Search events, venues...",
+    "search": "Search",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "thisWeekend": "This weekend",
+    "thisWeek": "This week",
+    "thisMonth": "This month",
+    "free": "Free",
+    "allLocations": "All locations",
+    "clear": "Clear"
+  },
+  "eventDetail": {
+    "backToEvents": "Events",
+    "addToCalendar": "Add to calendar",
+    "googleCalendar": "Google Calendar",
+    "appleOutlook": "Apple / Outlook (.ics)",
+    "share": "Share event",
+    "linkCopied": "Link copied!",
+    "date": "Date",
+    "time": "Time",
+    "location": "Location",
+    "price": "Price",
+    "about": "About this event",
+    "locationHeading": "Location",
+    "organizer": "Organizer",
+    "website": "Website",
+    "instagram": "Instagram",
+    "relatedEvents": "You might also like",
+    "mapTitle": "Map of {location}"
+  },
+  "categoriesPage": {
+    "title": "Categories",
+    "subtitle": "Choose what you feel like doing in Braga today.",
+    "metaDescription": "Explore events in Braga by category: music, parties, culture, food, sports, markets, workshops and family.",
+    "eventCount_one": "{count} event",
+    "eventCount_other": "{count} events"
+  },
+  "notFound": {
+    "title": "We couldn't find that page",
+    "description": "The event may have ended or the address is incorrect. Explore upcoming events in Braga.",
+    "cta": "See events in Braga",
+    "backHome": "Back to home"
+  },
+  "footer": {
+    "description": "The platform that shows you everything happening in Braga. Concerts, parties, culture and more — always up to date.",
+    "location": "Braga, Portugal",
+    "exploreHeading": "Explore",
+    "allEvents": "All events",
+    "todayInBraga": "Today in Braga",
+    "thisWeekend": "This weekend",
+    "categories": "Categories",
+    "followHeading": "Follow us",
+    "legalHeading": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsConditions": "Terms & Conditions",
+    "rights": "All rights reserved.",
+    "madeWith": "Made with ♥ in Braga, Portugal."
+  },
+  "languageSwitcher": {
+    "label": "Language"
+  },
+  "legal": {
+    "lastUpdated": "Last updated"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "metaDescription": "How Braga Event collects, uses and protects your personal data.",
+    "intro": "This Privacy Policy explains how Braga Event collects, uses and protects visitor information on our website. By using the site, you agree to the practices described here.",
+    "sections": [
+      {
+        "heading": "1. Information we collect",
+        "body": "Braga Event is a free event-discovery platform open to the public. No account is required to browse events. We may automatically collect non-identifying technical data, such as device type, browser, pages visited and time spent, through cookies and analytics tools, in order to improve the site experience."
+      },
+      {
+        "heading": "2. How we use information",
+        "body": "We use collected data to: (a) improve the website's performance and usability; (b) understand which content and events generate the most interest; (c) measure the performance of advertising banners shown in the \"Featured\" section; and (d) ensure the security and correct operation of the platform."
+      },
+      {
+        "heading": "3. Cookies",
+        "body": "We use essential cookies for the site to function (for example, to remember your language preference) and optional analytics cookies to understand how the site is used. You can manage or disable cookies in your browser settings."
+      },
+      {
+        "heading": "4. Data sharing",
+        "body": "We do not sell or share personal data with third parties for marketing purposes. Aggregated and anonymous data about event or banner views and clicks may be shared with advertisers, exclusively as general statistics and without any identifiable information."
+      },
+      {
+        "heading": "5. Admin area",
+        "body": "Access to the administration area is restricted and protected by secure authentication. Administrator credentials are stored encrypted (hashed) and never in plain text."
+      },
+      {
+        "heading": "6. Your rights",
+        "body": "You have the right to request information about any data we may have collected, as well as its correction or deletion, through the contact details available on the website."
+      },
+      {
+        "heading": "7. Changes to this policy",
+        "body": "This Privacy Policy may be updated periodically. We recommend checking this page regularly to stay informed of any changes."
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms & Conditions",
+    "metaDescription": "Terms and conditions for using the Braga Event platform.",
+    "intro": "By accessing and using the Braga Event website, you accept the terms and conditions described below. If you do not agree with any of these terms, please do not use the platform.",
+    "sections": [
+      {
+        "heading": "1. About the platform",
+        "body": "Braga Event is a free, public event-discovery platform for the city of Braga, Portugal. No registration or account is required to browse, search or filter events."
+      },
+      {
+        "heading": "2. Use of the service",
+        "body": "The content shown (events, dates, prices, locations and advertising banners) is provided for informational purposes and is managed exclusively by the platform administration. Braga Event is not responsible for changes, cancellations or incorrect information provided by event organizers."
+      },
+      {
+        "heading": "3. Advertising and banners",
+        "body": "Promotional banners shown in the \"Featured\" section correspond to paid campaigns from local projects and businesses, managed and published exclusively by the platform administration. Braga Event is not responsible for the content, products or services advertised by third parties through these banners."
+      },
+      {
+        "heading": "4. Intellectual property",
+        "body": "The name \"Braga Event\", the design, the logo and all original website content are the property of the platform. Reproduction, in whole or in part, without prior authorization is prohibited."
+      },
+      {
+        "heading": "5. Limitation of liability",
+        "body": "Braga Event strives to keep information up to date and accurate but does not guarantee the accuracy, completeness or continuous availability of the service. Use of the platform is at the user's own risk."
+      },
+      {
+        "heading": "6. Administrative access",
+        "body": "Access to content management features (events, banners, categories) is reserved exclusively for authenticated administrators. Any attempt at unauthorized access is strictly prohibited."
+      },
+      {
+        "heading": "7. Changes to these terms",
+        "body": "These Terms & Conditions may be updated periodically without prior notice. Continued use of the platform after changes implies acceptance of the new terms."
+      },
+      {
+        "heading": "8. Contact",
+        "body": "For questions related to these Terms & Conditions or the Privacy Policy, you can contact us through the channels listed on the website."
+      }
+    ]
+  }
+}

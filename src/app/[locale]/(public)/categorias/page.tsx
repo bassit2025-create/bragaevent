@@ -1,17 +1,31 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { getAllCategories } from "@/lib/data/categories";
 import { getCategoryStyle } from "@/lib/categoryStyles";
 import { prisma } from "@/lib/prisma";
 
-export const metadata: Metadata = {
-  title: "Categorias de eventos em Braga",
-  description:
-    "Explora eventos em Braga por categoria: música, festas, cultura, gastronomia, desporto, mercados, workshops e família.",
-  alternates: { canonical: "/categorias" },
-};
+type Params = Promise<{ locale: string }>;
 
-export default async function CategoriesPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "categoriesPage" });
+  return {
+    title: t("title"),
+    description: t("metaDescription"),
+    alternates: { canonical: `/${locale}/categorias` },
+  };
+}
+
+export default async function CategoriesPage({ params }: { params: Params }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("categoriesPage");
+
   const categories = await getAllCategories();
   const counts = await prisma.event.groupBy({
     by: ["categoryId"],
@@ -23,11 +37,9 @@ export default async function CategoriesPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
       <h1 className="font-display text-3xl font-bold text-ink md:text-4xl">
-        Categorias
+        {t("title")}
       </h1>
-      <p className="mt-2 max-w-lg text-ink-soft">
-        Escolhe o que te apetece fazer em Braga hoje.
-      </p>
+      <p className="mt-2 max-w-lg text-ink-soft">{t("subtitle")}</p>
 
       <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {categories.map((cat) => {
@@ -47,7 +59,7 @@ export default async function CategoriesPage() {
                   {cat.name}
                 </h2>
                 <p className={`text-sm ${style.text} opacity-80`}>
-                  {count} {count === 1 ? "evento" : "eventos"}
+                  {t(count === 1 ? "eventCount_one" : "eventCount_other", { count })}
                 </p>
               </div>
             </Link>

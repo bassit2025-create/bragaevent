@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { CalendarPlus, ChevronDown } from "lucide-react";
 
 type Props = {
@@ -68,6 +69,7 @@ function buildIcsFile(props: Props) {
 }
 
 export function AddToCalendarButton(props: Props) {
+  const t = useTranslations("eventDetail");
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -101,25 +103,25 @@ export function AddToCalendarButton(props: Props) {
         className="inline-flex items-center justify-center gap-2 rounded-2xl bg-accent px-5 py-3 text-sm font-bold text-white shadow-sm shadow-accent/20 transition-colors hover:bg-accent-dark active:scale-95"
       >
         <CalendarPlus size={18} />
-        Adicionar ao calendário
+        {t("addToCalendar")}
         <ChevronDown size={16} className={open ? "rotate-180" : ""} />
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full z-10 mt-2 w-56 overflow-hidden rounded-xl bg-white py-1.5 shadow-xl ring-1 ring-ink/10">
+        <div className="absolute start-0 top-full z-10 mt-2 w-56 overflow-hidden rounded-xl bg-white py-1.5 shadow-xl ring-1 ring-ink/10">
           <a
             href={buildGoogleCalendarUrl(props)}
             target="_blank"
             rel="noopener noreferrer"
             className="block px-4 py-2.5 text-sm font-semibold text-ink hover:bg-ink/5"
           >
-            Google Calendar
+            {t("googleCalendar")}
           </a>
           <button
             onClick={downloadIcs}
-            className="block w-full px-4 py-2.5 text-left text-sm font-semibold text-ink hover:bg-ink/5"
+            className="block w-full px-4 py-2.5 text-start text-sm font-semibold text-ink hover:bg-ink/5"
           >
-            Apple / Outlook (.ics)
+            {t("appleOutlook")}
           </button>
         </div>
       )}

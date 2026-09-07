@@ -1,17 +1,21 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { MobileNav } from "@/components/MobileNav";
-
-const navLinks = [
-  { href: "/", label: "Início" },
-  { href: "/eventos", label: "Eventos" },
-  { href: "/eventos?quando=hoje", label: "Hoje" },
-  { href: "/eventos?quando=fim-de-semana", label: "Este fim de semana" },
-  { href: "/categorias", label: "Categorias" },
-];
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export function SiteHeader() {
+  const t = useTranslations("nav");
+
+  const navLinks = [
+    { href: "/", label: t("inicio") },
+    { href: "/eventos", label: t("eventos") },
+    { href: "/eventos?quando=hoje", label: t("hoje") },
+    { href: "/eventos?quando=fim-de-semana", label: t("fimDeSemana") },
+    { href: "/categorias", label: t("categorias") },
+  ];
+
   return (
-    <header className="sticky top-0 z-40 border-b border-ink/8 bg-cream/85 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-ink/8 bg-cream">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8">
         <Link href="/" className="flex items-center gap-2">
           <span className="font-display text-xl font-bold tracking-tight text-ink md:text-2xl">
@@ -31,7 +35,12 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <MobileNav links={navLinks} />
+        <div className="flex items-center gap-1">
+          <div className="hidden lg:block">
+            <LanguageSwitcher />
+          </div>
+          <MobileNav links={navLinks} />
+        </div>
       </div>
     </header>
   );

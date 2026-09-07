@@ -1,0 +1,110 @@
+// Braga Event — Prisma schema
+// Uses the classic Prisma Client generator (client generated into node_modules/@prisma/client)
+// SQLite for zero-config local/dev persistence. Swap the datasource provider to
+// "postgresql" and update DATABASE_URL for production deployments.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum BannerStatus {
+  DRAFT
+  SCHEDULED
+  ACTIVE
+  EXPIRED
+  DISABLED
+}
+
+enum AdminRole {
+  ADMIN
+  SUPER_ADMIN
+}
+
+model Category {
+  id     String  @id @default(cuid())
+  name   String  @unique
+  slug   String  @unique
+  icon   String  @default("✨")
+  color  String  @default("#FF5A3C")
+  events Event[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("categories")
+}
+
+model Event {
+  id          String      @id @default(cuid())
+  title       String
+  slug        String      @unique
+  description String
+  image       String
+  date        DateTime
+  startTime   String
+  endTime     String?
+  location    String
+  address     String
+  price       Float       @default(0)
+  isFree      Boolean     @default(true)
+  organizer   String
+  website     String?
+  instagram   String?
+  isFeatured  Boolean     @default(false)
+  status      EventStatus @default(DRAFT)
+  views       Int         @default(0)
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("events")
+  @@index([status])
+  @@index([date])
+  @@index([categoryId])
+}
+
+model Banner {
+  id              String       @id @default(cuid())
+  name            String
+  projectName     String
+  image           String
+  destinationUrl  String
+  description     String?
+  startDate       DateTime
+  endDate         DateTime
+  status          BannerStatus @default(DRAFT)
+  impressions     Int          @default(0)
+  clicks          Int          @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("banners")
+  @@index([status])
+}
+
+model Admin {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  password  String
+  name      String    @default("Admin")
+  role      AdminRole @default(ADMIN)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admins")
+}

@@ -21,10 +21,13 @@ export function buildEventWhere(
   }
 
   if (filters.q) {
+    // Postgres string filters are case-sensitive by default (unlike
+    // SQLite), so "mode: insensitive" is required for search to behave
+    // the way users expect.
     where.OR = [
-      { title: { contains: filters.q } },
-      { description: { contains: filters.q } },
-      { location: { contains: filters.q } },
+      { title: { contains: filters.q, mode: "insensitive" } },
+      { description: { contains: filters.q, mode: "insensitive" } },
+      { location: { contains: filters.q, mode: "insensitive" } },
     ];
   }
 
@@ -33,7 +36,7 @@ export function buildEventWhere(
   }
 
   if (filters.location) {
-    where.location = { contains: filters.location };
+    where.location = { contains: filters.location, mode: "insensitive" };
   }
 
   if (filters.free) {

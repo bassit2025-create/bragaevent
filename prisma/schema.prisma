@@ -1,14 +1,16 @@
 // Braga Event — Prisma schema
-// Uses the classic Prisma Client generator (client generated into node_modules/@prisma/client)
-// SQLite for zero-config local/dev persistence. Swap the datasource provider to
-// "postgresql" and update DATABASE_URL for production deployments.
+// Postgres datasource. Works out of the box with Vercel's "Prisma
+// Postgres" marketplace integration (which provisions a single pooled
+// DATABASE_URL), and with Neon/Supabase/any standard Postgres connection
+// string. If your provider needs a separate non-pooled connection for
+// migrations, add a `directUrl = env("DIRECT_URL")` line here.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 

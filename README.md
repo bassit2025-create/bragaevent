@@ -5,12 +5,12 @@ browse events and promoted local banners with no account needed; a private
 admin dashboard at `/admin` lets the site owner manage everything.
 
 Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, and Prisma
-(SQLite).
+(PostgreSQL).
 
 ## Stack
 
 - **Next.js 16** — App Router, Server Actions, Server Components
-- **Prisma 6 + SQLite** — `Event`, `Banner`, `Category`, `Admin` models
+- **Prisma 6 + PostgreSQL** — `Event`, `Banner`, `Category`, `Admin` models
 - **jose** — signed JWT session cookies for admin auth (no third-party auth
   provider)
 - **bcryptjs** — password hashing
@@ -26,11 +26,17 @@ Install dependencies (already done if you're reading this after setup):
 npm install
 ```
 
-Copy `.env` and adjust as needed. For local development the defaults work
-out of the box:
+You need a PostgreSQL database. Options:
+
+- **Local:** run Postgres via Docker: `docker run --name bragaevent-db -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres`
+- **Cloud (recommended for zero setup):** create a free database with
+  [Prisma Postgres](https://www.prisma.io/postgres), [Neon](https://neon.tech),
+  or [Supabase](https://supabase.com), and copy its connection string.
+
+Update `.env` with your connection string:
 
 ```bash
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="postgresql://user:password@host:5432/bragaevent"
 SESSION_SECRET="<a long random string>"       # generate with: openssl rand -base64 32
 NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 ```
@@ -38,11 +44,15 @@ NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 **Important:** `SESSION_SECRET` signs admin session cookies. Use a strong,
 unique value in production — never reuse the development default.
 
-Run the initial migration (creates `prisma/dev.db`):
+Run the initial migration (creates all tables in your Postgres database):
 
 ```bash
-npx prisma migrate dev
+npx prisma migrate deploy
 ```
+
+(Use `npm run db:migrate` instead if you plan to keep evolving the schema
+locally — it runs `prisma migrate dev`, which also generates new migration
+files when the schema changes.)
 
 Seed sample Braga data (8 categories, 12 events, 4 banners, and an admin
 account):
@@ -76,6 +86,26 @@ npm run dev
 npm run build
 npm run start
 ```
+
+## Deploying to Vercel
+
+1. Import the GitHub repo in Vercel.
+2. Add the **Prisma Postgres** integration from the "Optional Integrations"
+   step (or Storage tab) — this automatically provisions a pooled
+   `DATABASE_URL` for your project. Alternatively, use Neon/Supabase and
+   set `DATABASE_URL` manually in Project Settings → Environment Variables.
+3. Also set `SESSION_SECRET` (a strong random value) and
+   `NEXT_PUBLIC_SITE_URL` (your production domain) as environment
+   variables.
+4. Deploy. The `postinstall` script runs `prisma generate` automatically
+   on every build.
+5. After the first deploy, run the migration against your production
+   database once (from your machine, with `DATABASE_URL` pointed at
+   production): `npx prisma migrate deploy`. Then seed it if you want the
+   sample Braga data: `npm run db:seed`.
+
+**Change the seeded admin password immediately** after your first deploy
+if you seeded production data — see `npm run db:seed` output below.
 
 ## Project structure
 

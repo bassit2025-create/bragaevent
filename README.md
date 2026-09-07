@@ -36,6 +36,29 @@ The `/admin` dashboard is intentionally **not** localized — it always
 renders in Portuguese, since it's only used by the site owner, and is
 excluded from the locale routing entirely.
 
+## Mobile app
+
+A native iOS/Android companion app lives in [`mobile/`](./mobile/README.md)
+(Expo + React Native), consuming this backend through the public
+`/api/v1/*` JSON API described below. See that folder's README for setup
+and App Store / Play Store submission steps.
+
+## Public API (`/api/v1`)
+
+Read-only JSON endpoints used by the mobile app (CORS-enabled, no auth
+required — this mirrors the same public data already visible on the
+website):
+
+| Endpoint | Description |
+|---|---|
+| `GET /api/v1/events` | List published events. Query params: `q`, `categoria`, `quando`, `gratis`, `local` |
+| `GET /api/v1/events/[slug]` | Single event + related events |
+| `GET /api/v1/categories` | All categories |
+| `GET /api/v1/banners` | Currently active banners |
+| `POST /api/v1/banners/[id]/click` | Click tracking |
+| `POST /api/v1/push-tokens` | Register a device for push notifications (`token`, `platform`, `locale`) |
+| `DELETE /api/v1/push-tokens` | Unregister a device |
+
 ## Getting started
 
 Install dependencies (already done if you're reading this after setup):
